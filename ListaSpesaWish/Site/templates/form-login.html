@@ -1,0 +1,21 @@
+<!-- Login form -->
+<div>
+    <div class="uk-form">
+        <legend>Entra con il tuo account</legend>
+        <div class="uk-grid">
+            <div class="uk-width-1-2">
+                <input type="text" class="uk-form-small" name="username" placeholder="Username" ng-model="username" ng-keypress="($event.which === 13)?userCtrl.login():0" />
+            </div>
+            <div class="uk-width-1-2">
+                <input type="password" class="uk-form-small uk-form-password" name="password" placeholder="Password" ng-model="password" ng-keypress="($event.which === 13)?userCtrl.login():0" />
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1-1 uk-text-center">
+                <div class="uk-button-group">
+                    <button class="uk-button uk-button-primary" ng-click="userCtrl.login()" ng-keypress="($event.which === 13)?userCtrl.login():0">Entra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

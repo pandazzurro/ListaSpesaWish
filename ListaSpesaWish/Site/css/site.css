@@ -1,0 +1,79 @@
+﻿html,
+body {
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+form-login .uk-grid ~ .uk-grid {
+    margin-top: 5px !important;
+}
+
+form-login legend ~ legend {
+    margin-top: 20px !important;
+}
+
+form-login legend,
+form-login-side legend {
+    text-align: center;
+    font-size: small !important;
+}
+
+form-login-side {
+    margin-bottom: 10px;
+}
+
+    form-login-side legend ~ legend {
+        margin-top: 20px !important;
+    }
+
+.uk-grid.nomargin {
+    margin: 0;
+}
+
+.uk-navbar-attached {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+#navbar-side legend {
+    color: #fff;
+}
+
+#navbar-side .nav-header-username {
+    text-transform: none;
+}
+
+legend > i {
+    font-size: 12px;
+}
+
+div.footer {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+div.content {
+    padding-bottom: 200px;
+    padding-top: 50px;
+}
+
+div.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    div.footer {
+        height: 350px;
+    }
+
+    div.content {
+        padding-bottom: 350px;
+    }
+}

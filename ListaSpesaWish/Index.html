@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="it-IT" ng-app="lsw">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="Content/uikit.css" />
+    <link rel="stylesheet" type="text/css" href="Content/components/accordion.css" />
+    <link rel="stylesheet" type="text/css" href="Content/components/sticky.min.css" />
+    <link rel="stylesheet" type="text/css" href="Content/components/form-password.min.css" />
+    <link rel="stylesheet" type="text/css" href="Site/css/loading-bar.css" />
+    <title>Lista della spesa</title>
+    <meta charset="utf-8" />
+</head>
+<body ng-controller="UserController as userCtrl">
+    <div class="wrapper">
+        <navbar-top></navbar-top>
+        <!-- Content -->
+        <div class="content uk-grid" style="min-height:500px">
+            <div class="uk-width-medium-1-1 uk-width-small-1-1">
+                <div ng-view></div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="uk-block-primary footer uk-responsive-height">
+            <navbar-footer></navbar-footer>
+        </div>
+        <div class="modal-loading"></div>
+    </div>
+
+    <script type="text/javascript" src="Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="Scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="Scripts/angular-resource.min.js"></script>
+    <script type="text/javascript" src="Scripts/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="Site/js/roundProgress.min.js"></script>
+
+    <script type="text/javascript" src="Scripts/uikit.min.js"></script>
+    <script type="text/javascript" src="Scripts/components/tooltip.min.js"></script>
+    <script type="text/javascript" src="Scripts/components/notify.min.js"></script>
+    <script type="text/javascript" src="Scripts/components/accordion.min.js"></script>
+
+    <script type="text/javascript" src="Site/js/app.js"></script>
+    <script type="text/javascript" src="Site/js/factory.js"></script>
+    <script type="text/javascript" src="Site/js/services.js"></script>
+    <script type="text/javascript" src="Site/js/templates.js"></script>
+    <script type="text/javascript" src="Site/js/userController.js"></script>
+</body>
+</html>
