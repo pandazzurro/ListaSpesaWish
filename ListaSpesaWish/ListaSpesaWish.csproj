@@ -1083,7 +1083,7 @@
     <Content Include="Site\js\app.js" />
     <Content Include="Site\js\directive-listaSpesa.js" />
     <Content Include="Site\js\factory.js" />
-    <Content Include="Site\js\roundProgress.min.js" />
+    <Content Include="Site\js\loading-bar.js" />
     <Content Include="Site\js\services.js" />
     <Content Include="Site\js\templates.js" />
     <Content Include="Site\js\userController.js" />

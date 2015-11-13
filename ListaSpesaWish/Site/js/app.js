@@ -1,5 +1,11 @@
 ﻿"use strict";
-var app = angular.module('lsw', ['ngRoute', 'ngResource', 'ngCookies', 'angular-svg-round-progress']);
+var app = angular.module('lsw', ['ngRoute', 'ngResource', 'ngCookies', 'angular-loading-bar']);
+
+    // configure loading bar
+    app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = true;
+        cfpLoadingBarProvider.includeBar = true;
+    }]);
 
     app.config(['$httpProvider', function ($httpProvider) {
         if (!$httpProvider.defaults.headers.get) {

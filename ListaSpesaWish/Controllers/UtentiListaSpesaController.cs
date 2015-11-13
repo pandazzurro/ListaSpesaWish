@@ -81,6 +81,9 @@ namespace ListaSpesaWish.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
+            utentiListaSpesa.Utente = await db.Utente.FindAsync(utentiListaSpesa.Utente.IdUtente);
+            utentiListaSpesa.ListaSpesa = await db.ListaSpesa.FindAsync(utentiListaSpesa.ListaSpesa.IdListaSpesa);
 
             db.UtentiListaSpesa.Add(utentiListaSpesa);
             await db.SaveChangesAsync();

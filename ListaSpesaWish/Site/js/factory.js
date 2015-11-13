@@ -7,10 +7,10 @@ app.factory('factories', ['$resource', function ($resource) {
             logout: { url: app.webapi + '/api/account/logout', method: 'POST', isArray: false },            
         }),
         listaSpesa: $resource(app.webapi, {}, {
-            get: { url: app.webapi + '/api/listaSpesa/:id', method: 'GET', isArray: false },
-            add: { url: app.webapi + '/api/listaSpesa', method: 'POST', isArray: false },
-            update: { url: app.webapi + '/api/listaSpesa/:id', method: 'PUT', isArray: false },
-            remove: { url: app.webapi + '/api/listaSpesa/:id', method: 'DELETE', isArray: false }
+            get: { url: app.webapi + '/api/ListaSpesa/:id', method: 'GET', isArray: false },
+            add: { url: app.webapi + '/api/ListaSpesa', method: 'POST', isArray: false },
+            update: { url: app.webapi + '/api/ListaSpesa/:id', method: 'PUT', isArray: false },
+            remove: { url: app.webapi + '/api/ListaSpesa/:id', method: 'DELETE', isArray: false }
         }),
         utente: $resource(app.webapi, {}, {
             get: { url: app.webapi + '/api/utente/:id', method: 'GET', isArray: false },
@@ -20,20 +20,20 @@ app.factory('factories', ['$resource', function ($resource) {
             remove: { url: app.webapi + '/api/utente/:id', method: 'DELETE', isArray: false }
         }),
         voce: $resource(app.webapi, {}, {
-            get: { url: app.webapi + '/api/voce/:id', method: 'GET', isArray: false },
-            getAll: { url: app.webapi + '/api/voce/', method: 'GET', isArray: true },
+            get: { url: app.webapi + '/api/Voce/:id', method: 'GET', isArray: false },
+            getAll: { url: app.webapi + '/api/Voce/', method: 'GET', isArray: true },
         }),
         utenteListaSpesa: $resource(app.webapi, {}, {
-            get: { url: app.webapi + '/api/utenteListaSpesa/:id', method: 'GET', isArray: false },
-            add: { url: app.webapi + '/api/utenteListaSpesa', method: 'POST', isArray: false },
-            update: { url: app.webapi + '/api/utenteListaSpesa/:id', method: 'PUT', isArray: false },
-            remove: { url: app.webapi + '/api/utenteListaSpesa/:id', method: 'DELETE', isArray: false }
+            get: { url: app.webapi + '/api/UtentiListaSpesa/:id', method: 'GET', isArray: false },
+            add: { url: app.webapi + '/api/UtentiListaSpesa', method: 'POST', isArray: false },
+            update: { url: app.webapi + '/api/UtentiListaSpesa/:id', method: 'PUT', isArray: false },
+            remove: { url: app.webapi + '/api/UtentiListaSpesa/:id', method: 'DELETE', isArray: false }
         }),
         voceListaSpesa: $resource(app.webapi, {}, {
-            get: { url: app.webapi + '/api/voceListaSpesa/:id', method: 'GET', isArray: false },
-            add: { url: app.webapi + '/api/voceListaSpesa', method: 'POST', isArray: false },
-            update: { url: app.webapi + '/api/voceListaSpesa/:id', method: 'PUT', isArray: false },
-            remove: { url: app.webapi + '/api/voceListaSpesa/:id', method: 'DELETE', isArray: false }
+            get: { url: app.webapi + '/api/VoceListaSpesa/:id', method: 'GET', isArray: false },
+            add: { url: app.webapi + '/api/VoceListaSpesa', method: 'POST', isArray: false },
+            update: { url: app.webapi + '/api/VoceListaSpesa/:id', method: 'PUT', isArray: false },
+            remove: { url: app.webapi + '/api/VoceListaSpesa/:id', method: 'DELETE', isArray: false }
         }),
     }
 }]);

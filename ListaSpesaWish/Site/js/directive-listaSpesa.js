@@ -15,16 +15,15 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
             _this.voci = [];
             _this.utenti = [];            
 
-
             this.pulisciLista = function () {
                 _this.vociAdded = [];
                 _this.utentiAdded = [];
                 _this.lista = {};
-                _this.voci = [];
-                _this.utenti = [];
+                _this.loadUtenteCorrenteInLista();
+                _this.modalInvertStatus("pulisciLista");
             };
             this.addList = function () {
-                var queryParameters = {
+                var queryParameters = {                
                     Nome: _this.lista.Nome,
                     UtentiListaSpesa: [],
                     VoceListaSpesa: []
@@ -33,9 +32,41 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                 lswFct.listaSpesa.add(queryParameters).$promise
                 .then(function (success) {
                     _this.lista = success;
-
+                    _this.addListComponent(_this.lista);
+                    _this.modalInvertStatus("salvaLista");
                 });
             };
+
+            this.addListComponent = function(listaSpesa){
+                var idUtentiListaSpesa = 0, idVoceListaSpesa = 0;
+                var listaSpesa = { IdListaSpesa: listaSpesa.IdListaSpesa };
+
+                _this.utentiAdded.forEach(function(u){
+                    var UtentiListaSpesaParameter = {
+                        IdUtentiListaSpesa: idUtentiListaSpesa,
+                        Utente: { IdUtente: u.IdUtente },
+                        ListaSpesa: listaSpesa
+                    };
+
+                    lswFct.utenteListaSpesa.add(UtentiListaSpesaParameter).$promise
+                    .then(function (success) {
+                    });
+                });
+                
+                var vociSelezionate = [];
+                _this.vociAdded.forEach(function (v) {
+                    var VoceListaSpesaParameter = {
+                        IdVoceListaSpesa: idVoceListaSpesa,
+                        Comprata : v.Comprata ? true : false,
+                        Voce: {IdVoce : v.IdVoce},
+                        ListaSpesa: listaSpesa
+                    }
+                    lswFct.voceListaSpesa.add(VoceListaSpesaParameter).$promise
+                   .    then(function (success) {
+                    });
+                });
+            }
+
             this.addVoce = function (voce) {
                 newVoce = jQuery.extend(true, {}, voce);
                 newVoce.incremental = _this.duplicateVoceIncremental();
@@ -97,6 +128,14 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                     return _this.vociAdded.length;                
             }
 
+            this.modalInvertStatus = function (modalId) {
+                var modal = UIkit.modal("#" + modalId);
+                if (modal.isActive()) {
+                    modal.hide();
+                } else {
+                    modal.show();
+                }
+            }            
 
             // OnLoad
             this.loadVoci();

@@ -80,6 +80,9 @@ namespace ListaSpesaWish.Controllers
                 return BadRequest(ModelState);
             }
 
+            voceListaSpesa.Voce = await db.Voce.FindAsync(voceListaSpesa.Voce.IdVoce);
+            voceListaSpesa.ListaSpesa = await db.ListaSpesa.FindAsync(voceListaSpesa.ListaSpesa.IdListaSpesa);
+
             db.VoceListaSpesa.Add(voceListaSpesa);
             await db.SaveChangesAsync();
 

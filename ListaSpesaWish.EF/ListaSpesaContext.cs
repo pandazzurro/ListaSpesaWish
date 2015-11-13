@@ -62,7 +62,7 @@ namespace ListaSpesaWish.EF
 
             modelBuilder.Entity<ListaSpesa>()
                         .HasMany(x => x.UtentiListaSpesa)
-                        .WithRequired(x => x.ListaSpesa);
+                        .WithRequired(x => x.ListaSpesa);                                    
 
             modelBuilder.Entity<ListaSpesa>()
                         .HasMany(x => x.VociListaSpesa)
@@ -75,7 +75,7 @@ namespace ListaSpesaWish.EF
             modelBuilder.Entity<Utente>()
                         .HasMany(x => x.UtentiListaSpesa)
                         .WithRequired(x => x.Utente);
-
+            
             base.OnModelCreating(modelBuilder);
         }
     }
