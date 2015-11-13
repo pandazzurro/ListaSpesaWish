@@ -17,22 +17,15 @@ namespace ListaSpesaWish.Controllers
     {
 
         [Route("Login")]
-        [ResponseType(typeof(LoginDto))]
+        [ResponseType(typeof(UtenteDto))]
         public async Task<IHttpActionResult> PostUtente(LoginDto login)
         {
-            try
-            {
-                Utente utente = await db.Utente.Where(x => string.Compare(x.Username, login.Username, true) == 0 && 
-                                                           string.Compare(x.Password, login.Password, true) == 0)
-                                               .FirstOrDefaultAsync();
-                if (utente == null) return NotFound();
-                else return CreatedAtRoute("DefaultApi", new { id = utente.IdUtente }, utente);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return BadRequest();
+            Utente utente = await db.Utente.Where(x => string.Compare(x.Username, login.Username, true) == 0 && 
+                                                       string.Compare(x.Password, login.Password, true) == 0)
+                                           .FirstOrDefaultAsync();
+            if (utente == null) return NotFound();
+            else return Ok(new UtenteDto(utente));
+            
         }
     }
 }

@@ -19,7 +19,7 @@ namespace ListaSpesaWish.Controllers
 
         // GET: api/Voce
         public IQueryable<Voce> GetVoce()
-        {
+        {            
             return db.Voce;
         }
 

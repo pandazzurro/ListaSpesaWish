@@ -9,6 +9,7 @@ namespace ListaSpesaWish.EF
     public class ListaSpesa
     {
         public long IdListaSpesa { get; set; }
+        public string Nome { get; set; }
         
         public ICollection<UtentiListaSpesa> UtentiListaSpesa { get; set; }
         public ICollection<VoceListaSpesa> VociListaSpesa { get; set; }

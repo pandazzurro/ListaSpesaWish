@@ -1,0 +1,83 @@
+﻿<button class="uk-button uk-button-success" ng-click="listaSpesa.addList()">
+    <i class="uk-icon-plus"></i> Aggiungi Lista
+</button>
+
+
+<!--<form class="uk-form" ng-show="search.searchPerformed">
+    <fieldset>
+        <legend>Risultati <i>Trovati {{search.results.searchGame.length}} record</i></legend>
+    </fieldset>
+    <table class="uk-table">
+        <thead>
+            <tr>
+                <th>Titolo</th>
+                <th>Genere</th>
+                <th>Piattaforma</th>
+                <th>Distanza</th>
+                <th>Utente</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr ng-repeat="game in search.results.searchGame">
+                <td><a href="#details" ng-click="search.showDetails(game)" data-uk-modal>{{ game.game.title }}</a></td>
+                <td>{{ search.getGenreById(game.game.genre.genreId).name }}</td>
+                <td><span class="{{ search.getPlatformById(game.game.platform.platformId).class }}"></span> {{ search.getPlatformById(game.game.platform.platformId).name }}</td>
+                <td>{{ search.round(game.distance) }} km</td>
+                <td><user-link data-user="{{ game.user.id }}"></user-link></td>
+            </tr>
+        </tbody>
+    </table>
+</form>-->
+
+
+
+<div id="details" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <form class="uk-form uk-form-horizontal">
+                    <fieldset>
+                        <legend>Dettagli del gioco</legend>
+                        <div class="uk-form-row">
+                            <div class="uk-form-label">Gioco:</div>
+                            <div class="uk-form-controls">{{search.details.game.title}} </div>
+                        </div>
+                        <div class="uk-form-row">
+                            <div class="uk-form-label">Piattaforma:</div>
+                            <div class="uk-form-controls"><span style="display:inline" class="{{ search.getPlatformById(search.details.game.platform.platformId).class }}"></span></div>
+                        </div>
+                        <div class="uk-form-row">
+                            <div class="uk-form-label">Proprietario:</div>
+                            <div class="uk-form-controls">{{ search.detailsUser.username }}</div>
+                        </div>
+                        <div class="uk-form-row">
+                            <div class="uk-form-label">Distanza:</div>
+                            <div class="uk-form-controls">{{ search.round(search.details.distance) }} km</div>
+                        </div>
+                        <div class="uk-form-row">
+                            <div class="uk-form-label">Lingua:</div>
+                            <div class="uk-form-controls">{{search.details.gameLanguage.description}}</div>
+                        </div>
+                        <div class="uk-form-row">
+                            <div class="uk-form-label">Stato:</div>
+                            <div class="uk-form-controls">{{search.details.status.description}}</div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-container-center">
+                <button class="uk-button" ng-click="search.sendProposal(search.details)">
+                    <i class="fa fa-envelope-o"></i> Invia messaggio
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

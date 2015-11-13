@@ -15,7 +15,7 @@ app.service('user-service', ['factories', function (lswFct) {
 
         lswFct.user.login(queryParameters).$promise
           .then(function (userSuccess) {
-              user = userSuccess;
+              user = userSuccess;              
           },
           function (error) {
               UIkit.notify('Username o password non validi', { status: 'warning', timeout: 5000 });
@@ -41,7 +41,7 @@ app.service('user-service', ['factories', function (lswFct) {
     };
 
     this.isLoggedIn = function () {
-        return user.userId !== undefined;
+        return user.IdUtente !== undefined;
     }
 
     this.getCurrentUser = function () {

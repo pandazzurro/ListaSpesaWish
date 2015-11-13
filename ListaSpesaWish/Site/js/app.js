@@ -32,9 +32,9 @@ var app = angular.module('lsw', ['ngRoute', 'ngResource', 'ngCookies', 'angular-
             //.when('/library/add', {
             //    template: '<games-search></games-search>',
             //})
-            //.when('/library', {
-            //    template: '<games-library></games-library>'
-            //})
+            .when('/listaSpesa', {
+                template: '<lista-spesa></lista-spesa>'
+            })
             .when('/', {
                 templateUrl: 'Site/templates/home.html'
             })
@@ -46,13 +46,8 @@ var app = angular.module('lsw', ['ngRoute', 'ngResource', 'ngCookies', 'angular-
    
     app.run(['$rootScope', '$location', 'user-service', function ($rootScope, $location, userSrv) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
-            if (next.$$route.originalPath != "/register"
-                //next.$$route.originalPath != "/regolamento" &&
-                //next.$$route.originalPath != "/spedizioni" &&
-                //next.$$route.originalPath != "/feedback" &&
-                //next.$$route.originalPath != "/come-funziona" &&
-                //next.$$route.originalPath != "/contattaci" &&
-                ) {
+            if (next.$$route.originalPath != "/register" &&
+                !userSrv.isLoggedIn()) {
                 $location.path("/");
             }
 

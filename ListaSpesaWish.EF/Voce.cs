@@ -11,6 +11,11 @@ namespace ListaSpesaWish.EF
         public long IdVoce { get; set; }
         public string Name { get; set; }
 
-        public VoceListaSpesa VoceListaSpesa { get; set; }
+        public ICollection<VoceListaSpesa> VociListaSpesa { get; set; }
+
+        public Voce()
+        {
+            VociListaSpesa = new HashSet<VoceListaSpesa>();
+        }
     }
 }

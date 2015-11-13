@@ -5,7 +5,7 @@
     var _this = this;
 
     this.login = function () {
-        userSrv.login(username, password);
+        userSrv.login($scope.username, $scope.password);
     };
 
     this.logout = function () {

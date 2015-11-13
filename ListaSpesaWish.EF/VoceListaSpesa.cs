@@ -12,11 +12,6 @@ namespace ListaSpesaWish.EF
         public bool Comprata { get; set; }
 
         public ListaSpesa ListaSpesa { get; set; }
-        public ICollection<Voce> Voci { get; set; }
-
-        public VoceListaSpesa()
-        {
-            Voci = new HashSet<Voce>();
-        }
+        public Voce Voce { get; set; }        
     }
 }
