@@ -20,14 +20,17 @@ namespace ListaSpesaWish.Controllers
         // GET: api/ListaSpesa
         public IQueryable<ListaSpesa> GetListaSpesa()
         {
-            return db.ListaSpesa;
+            return db.ListaSpesa
+                     .Include(x => x.UtentiListaSpesa)
+                     .Include(x => x.VociListaSpesa);
         }
 
         // GET: api/ListaSpesa/5
         [ResponseType(typeof(ListaSpesa))]
         public async Task<IHttpActionResult> GetListaSpesa(long id)
         {
-            ListaSpesa listaSpesa = await db.ListaSpesa.FindAsync(id);
+            ListaSpesa listaSpesa = await db.ListaSpesa                                            
+                                            .FindAsync(id);
             if (listaSpesa == null)
             {
                 return NotFound();

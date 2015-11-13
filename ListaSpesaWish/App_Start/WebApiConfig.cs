@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace ListaSpesaWish
 {
@@ -12,7 +13,12 @@ namespace ListaSpesaWish
         public static void Register(HttpConfiguration config)
         {
             // Servizi e configurazione dell'API Web
-            //Database.SetInitializer<ListaSpesaContext>(null);
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.None
+            };
 
             // Route dell'API Web
             config.MapHttpAttributeRoutes();

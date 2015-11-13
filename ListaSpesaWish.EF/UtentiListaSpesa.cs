@@ -10,7 +10,7 @@ namespace ListaSpesaWish.EF
     {
         public long IdUtentiListaSpesa { get; set; }
 
-        public Utente Utente { get; set; }
-        public ListaSpesa ListaSpesa { get; set; }
+        public virtual Utente Utente { get; set; }
+        public virtual ListaSpesa ListaSpesa { get; set; }
     }
 }

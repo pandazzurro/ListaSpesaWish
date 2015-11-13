@@ -11,7 +11,7 @@ namespace ListaSpesaWish.EF
         public long IdVoceListaSpesa { get; set; }
         public bool Comprata { get; set; }
 
-        public ListaSpesa ListaSpesa { get; set; }
-        public Voce Voce { get; set; }        
+        public virtual ListaSpesa ListaSpesa { get; set; }
+        public virtual Voce Voce { get; set; }        
     }
 }

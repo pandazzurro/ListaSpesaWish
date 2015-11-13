@@ -1100,7 +1100,9 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ListaSpesaController.cs" />
     <Compile Include="Controllers\UtenteController.cs" />
+    <Compile Include="Controllers\UtentiListaSpesaController.cs" />
     <Compile Include="Controllers\VoceController.cs" />
+    <Compile Include="Controllers\VoceListaSpesaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

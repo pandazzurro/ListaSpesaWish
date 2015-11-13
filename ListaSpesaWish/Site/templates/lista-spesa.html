@@ -1,72 +1,153 @@
-﻿<button class="uk-button uk-button-success" ng-click="listaSpesa.addList()">
-    <i class="uk-icon-plus"></i> Aggiungi Lista
-</button>
+﻿<div class="uk-grid">
+    <div class="uk-container-center">
+        <button class="uk-button uk-button-success" data-uk-modal="{target:'#pulisciLista'}">
+            <i class="uk-icon-eraser"></i> Pulisci Lista
+        </button>
 
+        <button class="uk-button uk-button-success" data-uk-modal="{target:'#salvaLista'}">
+            <i class="uk-icon-floppy-o"></i> Salva Lista
+        </button>
 
-<!--<form class="uk-form" ng-show="search.searchPerformed">
-    <fieldset>
-        <legend>Risultati <i>Trovati {{search.results.searchGame.length}} record</i></legend>
-    </fieldset>
-    <table class="uk-table">
-        <thead>
-            <tr>
-                <th>Titolo</th>
-                <th>Genere</th>
-                <th>Piattaforma</th>
-                <th>Distanza</th>
-                <th>Utente</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="5"></td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr ng-repeat="game in search.results.searchGame">
-                <td><a href="#details" ng-click="search.showDetails(game)" data-uk-modal>{{ game.game.title }}</a></td>
-                <td>{{ search.getGenreById(game.game.genre.genreId).name }}</td>
-                <td><span class="{{ search.getPlatformById(game.game.platform.platformId).class }}"></span> {{ search.getPlatformById(game.game.platform.platformId).name }}</td>
-                <td>{{ search.round(game.distance) }} km</td>
-                <td><user-link data-user="{{ game.user.id }}"></user-link></td>
-            </tr>
-        </tbody>
-    </table>
-</form>-->
+        <button class="uk-button uk-button-success" data-uk-modal="{target:'#carrello'}">
+            <i class="uk-icon-shopping-cart"></i> Mosta Carrello
+        </button>
 
+        <button class="uk-button uk-button-success" data-uk-modal="{target:'#utenti'}">
+            <i class="uk-icon-user"></i> Mosta Utenti
+        </button>
+    </div>
+</div>
 
+<div class="uk-grid data-uk-grid-margin">
+        <div class="uk-grid-width-1-2 uk-width-large-1-2 uk-width-medium-1-2">
+            <table class="uk-table uk-table-striped">
+                <caption>Voci</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="voce in listaSpesa.voci">
+                        <td class="uk-text-center uk-width-1-5">
+                            <button class="uk-button uk-button-success" ng-click="listaSpesa.addVoce(voce)"><i class="uk-icon-plus"></i></button>
+                        </td>
+                        <td class="uk-width-4-5">{{voce.Name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="uk-grid-width-1-2 uk-width-large-1-2 uk-width-medium-1-2">
+            <table class="uk-table">
+                <caption>Utenti</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="utente in listaSpesa.utenti">
+                        <td class="uk-text-center uk-width-1-5">
+                            <button class="uk-button uk-button-success" ng-click="listaSpesa.addUtente(utente)"><i class="uk-icon-plus"></i></button>
+                        </td>
+                        <td class="uk-width-4-5">{{utente.Username}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-<div id="details" class="uk-modal">
+    </div>
+
+<div id="carrello" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-grid">
+            <div class="uk-grid-width-1-1 uk-width-large-1-1 uk-width-medium-1-1">
+                <table class="uk-table uk-table-striped">
+                <caption>Voci</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                        <th>Comprata</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="voce in listaSpesa.vociAdded track by $index">
+                        <td class="uk-text-center uk-width-1-5">
+                            <button class="uk-button uk-button-danger" ng-click="listaSpesa.removeVoce(voce)"><i class="uk-icon-minus"></i></button>
+                        </td>
+                        <td>{{voce.Name}}</td>
+                        <td>
+                            <div class="uk-form-row">                                
+                                <div class="uk-form-controls uk-form-controls-text uk-form-controls-condensed">     
+                                    <input type="checkbox" id="form-comprata" ng-model="voce.Comprata">  
+                                    <label for="form-comprata">Voce acquistata?</label>                                    
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>        
+        </div>  
+        <div class="uk-grid">
+            <div class="uk-container-center">
+                <button class="uk-button uk-modal-close">
+                    <i class="uk-icon-close"></i> Chiudi
+                </button>
+            </div>
+        </div>     
+    </div>
+</div>
+
+<div id="utenti" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <a class="uk-modal-close uk-close"></a>
+            <div class="uk-grid">
+                <div class="uk-grid-width-1-2 uk-width-large-1-1 uk-width-medium-1-1">
+                    <table class="uk-table">
+                        <caption>Utenti</caption>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="utente in listaSpesa.utentiAdded track by $index">
+                                <td class="uk-text-center uk-width-1-5">
+                                    <button class="uk-button uk-button-danger" ng-click="listaSpesa.removeUtente(utente)"><i class="uk-icon-minus"></i></button>
+                                </td>
+                                <td>{{utente.Username}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-container-center">
+                    <button class="uk-button uk-modal-close">
+                        <i class="uk-icon-close"></i> Chiudi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="salvaLista" class="uk-modal">
     <div class="uk-modal-dialog">
         <a class="uk-modal-close uk-close"></a>
         <div class="uk-grid">
             <div class="uk-width-1-1">
                 <form class="uk-form uk-form-horizontal">
                     <fieldset>
-                        <legend>Dettagli del gioco</legend>
+                        <legend>Creazione di una nuova lista della spesa</legend>
                         <div class="uk-form-row">
-                            <div class="uk-form-label">Gioco:</div>
-                            <div class="uk-form-controls">{{search.details.game.title}} </div>
-                        </div>
-                        <div class="uk-form-row">
-                            <div class="uk-form-label">Piattaforma:</div>
-                            <div class="uk-form-controls"><span style="display:inline" class="{{ search.getPlatformById(search.details.game.platform.platformId).class }}"></span></div>
-                        </div>
-                        <div class="uk-form-row">
-                            <div class="uk-form-label">Proprietario:</div>
-                            <div class="uk-form-controls">{{ search.detailsUser.username }}</div>
-                        </div>
-                        <div class="uk-form-row">
-                            <div class="uk-form-label">Distanza:</div>
-                            <div class="uk-form-controls">{{ search.round(search.details.distance) }} km</div>
-                        </div>
-                        <div class="uk-form-row">
-                            <div class="uk-form-label">Lingua:</div>
-                            <div class="uk-form-controls">{{search.details.gameLanguage.description}}</div>
-                        </div>
-                        <div class="uk-form-row">
-                            <div class="uk-form-label">Stato:</div>
-                            <div class="uk-form-controls">{{search.details.status.description}}</div>
+                            <div class="uk-form-label">Nome Lista:</div>
+                            <div class="uk-form-controls"><input type="text" placeholder="Inserire il nome" ng-model="listaSpesa.lista.Nome" /></div>
                         </div>
                     </fieldset>
                 </form>
@@ -74,8 +155,36 @@
         </div>
         <div class="uk-grid">
             <div class="uk-container-center">
-                <button class="uk-button" ng-click="search.sendProposal(search.details)">
-                    <i class="fa fa-envelope-o"></i> Invia messaggio
+                <button class="uk-button uk-button-success" ng-click="listaSpesa.addList()">
+                    <i class="uk-icon-save"></i> Salva
+                </button>
+                <button class="uk-button uk-button-danger uk-modal-close">
+                    <i class="uk-icon-close"></i> Annulla
+                </button>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<div id="pulisciLista" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <form class="uk-form uk-form-horizontal">
+                    <fieldset>
+                        <legend>Vuoi annullare le modifiche sulla lista corrente?</legend>                        
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-container-center">
+                <button class="uk-button uk-button-success" ng-click="listaSpesa.pulisciLista()">
+                    <i class="uk-icon-save"></i> Conferma
+                </button>
+                <button class="uk-button uk-button-danger uk-modal-close">
+                    <i class="uk-icon-close"></i> Annulla
                 </button>
             </div>
         </div>
