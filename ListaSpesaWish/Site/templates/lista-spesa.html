@@ -5,7 +5,9 @@
         </button>
 
         <button class="uk-button uk-button-success" data-uk-modal="{target:'#salvaLista'}">
-            <i class="uk-icon-floppy-o"></i> Salva
+            <i class="uk-icon-floppy-o"></i> 
+            <span ng-hide="listaSpesa.editMode"> Crea</span>
+            <span ng-show="listaSpesa.editMode"> Aggiorna</span>
         </button>
 
         <button class="uk-button uk-button-success" data-uk-modal="{target:'#caricaLista'}" ng-click="listaSpesa.loadLists()">
@@ -43,7 +45,9 @@
                             <button class="uk-button uk-button-success" ng-click="listaSpesa.addVoce(voce)"><i class="uk-icon-plus"></i></button>
                         </td>
                         <td class="uk-width-3-5">{{voce.Name}}</td>
-                        <td class="uk-width-1-5"><img class="uk-comment-avatar" ng-src="data:image/gif;base64,{{voce.Image}}" style="height:30px;"/></td>
+                        <td class="uk-width-1-5">
+                            <img class="uk-comment-avatar imageIcon" ng-src="data:image/gif;base64,{{voce.Image}}" ng-click="listaSpesa.SelectedImage = voce.Image" data-uk-tooltip title="Clicca per ingrandire" data-uk-modal="{target:'#voceImage'}"/>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -85,6 +89,7 @@
                         <th></th>
                         <th>Nome</th>
                         <th>Comprata</th>
+                        <th>Immagine</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -157,7 +162,8 @@
             <div class="uk-width-1-1">
                 <form class="uk-form uk-form-horizontal">
                     <fieldset>
-                        <legend>Creazione di una nuova lista della spesa</legend>
+                        <legend ng-hide="listaSpesa.editMode">Creazione di una nuova lista della spesa</legend>
+                        <legend ng-show="listaSpesa.editMode">Aggiornamento della lista [{{listaSpesa.lista.Nome}}]</legend>
                         <div class="uk-form-row">
                             <div class="uk-form-label">Nome Lista:</div>
                             <div class="uk-form-controls"><input type="text" placeholder="Inserire il nome" ng-model="listaSpesa.lista.Nome" /></div>
@@ -168,8 +174,10 @@
         </div>
         <div class="uk-grid">
             <div class="uk-container-center">
-                <button class="uk-button uk-button-success" ng-click="listaSpesa.addList()">
-                    <i class="uk-icon-save"></i> Salva
+                <button class="uk-button uk-button-success" ng-click="listaSpesa.saveList()">
+                    <i class="uk-icon-save"></i>
+                    <span ng-hide="listaSpesa.editMode"> Salva</span>
+                    <span ng-show="listaSpesa.editMode"> Aggiorna</span>
                 </button>
                 <button class="uk-button uk-button-danger uk-modal-close">
                     <i class="uk-icon-close"></i> Annulla
@@ -237,5 +245,13 @@
                 </button>
             </div>
         </div>
+    </div>
+</div>
+
+
+<div id="voceImage" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-lightbox">
+        <a class="uk-modal-close uk-close uk-close-alt"></a>
+        <img class="uk-align-center imageLightBox" ng-src="data:image/gif;base64,{{listaSpesa.SelectedImage}}" alt="" >
     </div>
 </div>

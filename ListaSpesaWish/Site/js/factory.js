@@ -13,7 +13,8 @@ app.factory('factories', ['$resource', function ($resource) {
             add: { url: app.webapi + 'api/ListaSpesa', method: 'POST', isArray: false },
             mail: { url: app.webapi + 'api/ListaSpesa/Mail', method: 'POST', isArray: false },
             update: { url: app.webapi + 'api/ListaSpesa/:id', method: 'PUT', isArray: false },
-            remove: { url: app.webapi + 'api/ListaSpesa/:id', method: 'DELETE', isArray: false }
+            remove: { url: app.webapi + 'api/ListaSpesa/:id', method: 'DELETE', isArray: false },
+            clear: { url: app.webapi + 'api/ListaSpesa/Clear/:id', method: 'DELETE', isArray: false }
         }),
         utente: $resource(app.webapi, {}, {
             get: { url: app.webapi + 'api/utente/:id', method: 'GET', isArray: false },

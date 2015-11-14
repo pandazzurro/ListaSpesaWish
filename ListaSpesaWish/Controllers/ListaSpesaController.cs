@@ -24,7 +24,9 @@ namespace ListaSpesaWish.Controllers
         {
             return db.ListaSpesa
                      .Include(x => x.UtentiListaSpesa)
-                     .Include(x => x.VociListaSpesa);
+                     .Include(x => x.VociListaSpesa)
+                     .Include(x => x.VociListaSpesa.Select(y => y.Voce))
+                     .Include(x => x.UtentiListaSpesa.Select(y => y.Utente));
         }
 
         // GET: api/ListaSpesa/5
@@ -54,7 +56,7 @@ namespace ListaSpesaWish.Controllers
             {
                 return BadRequest();
             }
-
+            
             db.Entry(listaSpesa).State = EntityState.Modified;
 
             try
@@ -108,6 +110,32 @@ namespace ListaSpesaWish.Controllers
             await db.SaveChangesAsync();
 
             return Ok(listaSpesa);
+        }
+
+        [HttpDelete]
+        [Route("api/ListaSpesa/Clear/{id}")]
+        [ResponseType(typeof(ClearListaDto))]
+        public async Task<IHttpActionResult> ClearListaSpesa(long id)
+        {
+            ListaSpesa listaSpesa = await db.ListaSpesa.FindAsync(id);
+            
+            if (listaSpesa == null)
+            {
+                return NotFound();
+            }
+
+            if(!db.ListaSpesa
+                 .Include(x => x.VociListaSpesa)
+                 .Where(x => x.VociListaSpesa.Where(y => y.Comprata == false).Any())
+                 .Any())
+            {
+                db.UtentiListaSpesa.RemoveRange(db.UtentiListaSpesa.Where(x => x.ListaSpesa.IdListaSpesa == listaSpesa.IdListaSpesa));
+                db.VoceListaSpesa.RemoveRange(db.VoceListaSpesa.Where(x => x.ListaSpesa.IdListaSpesa == listaSpesa.IdListaSpesa));
+                db.ListaSpesa.Remove(listaSpesa);
+                await db.SaveChangesAsync();
+                return Ok(new ClearListaDto() { Response = true });
+            }
+            return Ok(new ClearListaDto() { Response = false });            
         }
 
         [HttpPost]

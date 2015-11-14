@@ -77,3 +77,13 @@ div.wrapper {
         padding-bottom: 350px;
     }
 }
+
+
+img.imageIcon{
+    height: 30px;
+}
+
+img.imageLightBox{
+    height: 100%;
+    width: 100%;
+}

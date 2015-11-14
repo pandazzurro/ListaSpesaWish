@@ -29,7 +29,10 @@ namespace ListaSpesaWish.Controllers
         [ResponseType(typeof(UtentiListaSpesa))]
         public async Task<IHttpActionResult> GetUtentiListaSpesa(long id)
         {
-            UtentiListaSpesa utentiListaSpesa = await db.UtentiListaSpesa.FindAsync(id);
+            UtentiListaSpesa utentiListaSpesa = await db.UtentiListaSpesa
+                                                        .Include(x => x.ListaSpesa)
+                                                        .Include(x => x.Utente)
+                                                        .SingleOrDefaultAsync(x => x.IdUtentiListaSpesa == id);
             if (utentiListaSpesa == null)
             {
                 return NotFound();
