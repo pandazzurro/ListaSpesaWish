@@ -8,7 +8,7 @@ app.factory('factories', ['$resource', function ($resource) {
             logout: { url: app.webapi + 'api/account/logout', method: 'POST', isArray: false },            
         }),
         listaSpesa: $resource(app.webapi, {}, {
-            get: { url: app.webapi + 'api/ListaSpesa/:id', method: 'GET', isArray: false },
+            get: { url: app.webapi + 'api/ListaSpesa/:id', method: 'GET', isArray: true },
             getAll: { url: app.webapi + 'api/ListaSpesa/', method: 'GET', isArray: true },
             add: { url: app.webapi + 'api/ListaSpesa', method: 'POST', isArray: false },
             mail: { url: app.webapi + 'api/ListaSpesa/Mail', method: 'POST', isArray: false },
@@ -26,6 +26,8 @@ app.factory('factories', ['$resource', function ($resource) {
         voce: $resource(app.webapi, {}, {
             get: { url: app.webapi + 'api/Voce/:id', method: 'GET', isArray: false },
             getAll: { url: app.webapi + 'api/Voce/', method: 'GET', isArray: true },
+            add: { url: app.webapi + 'api/Voce', method: 'POST', isArray: false },
+            remove: { url: app.webapi + 'api/Voce/:id', method: 'DELETE', isArray: false }
         }),
         utenteListaSpesa: $resource(app.webapi, {}, {
             get: { url: app.webapi + 'api/UtentiListaSpesa/:id', method: 'GET', isArray: false },

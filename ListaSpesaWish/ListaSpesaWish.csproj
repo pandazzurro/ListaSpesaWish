@@ -1081,11 +1081,14 @@
     <Content Include="Scripts\uikit.min.js" />
     <Content Include="Service\mailTemplate.html" />
     <Content Include="Site\css\loading-bar.css" />
+    <Content Include="Site\css\ng-img-crop.css" />
     <Content Include="Site\css\site.css" />
     <Content Include="Site\js\app.js" />
+    <Content Include="Site\js\directive-voci.js" />
     <Content Include="Site\js\directive-listaSpesa.js" />
     <Content Include="Site\js\factory.js" />
     <Content Include="Site\js\loading-bar.js" />
+    <Content Include="Site\js\ng-crop.js" />
     <Content Include="Site\js\services.js" />
     <Content Include="Site\js\templates.js" />
     <Content Include="Site\js\userController.js" />
@@ -1094,6 +1097,7 @@
     <Content Include="Site\templates\lista-spesa.html" />
     <Content Include="Site\templates\navbar-footer.html" />
     <Content Include="Site\templates\navbar-top.html" />
+    <Content Include="Site\templates\voci.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

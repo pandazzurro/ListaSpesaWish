@@ -31,16 +31,14 @@ namespace ListaSpesaWish.Controllers
 
         // GET: api/ListaSpesa/5
         [ResponseType(typeof(ListaSpesa))]
-        public async Task<IHttpActionResult> GetListaSpesa(long id)
+        public IQueryable<ListaSpesa> GetListaSpesa(long idUtente)
         {
-            ListaSpesa listaSpesa = await db.ListaSpesa                                            
-                                            .FindAsync(id);
-            if (listaSpesa == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(listaSpesa);
+            return db.ListaSpesa
+                     .Include(x => x.UtentiListaSpesa)
+                     .Include(x => x.VociListaSpesa)
+                     .Include(x => x.VociListaSpesa.Select(y => y.Voce))
+                     .Include(x => x.UtentiListaSpesa.Select(y => y.Utente))
+                     .Where(x => x.UtentiListaSpesa.Select(y => y.Utente.IdUtente == idUtente).Any());            
         }
 
         // PUT: api/ListaSpesa/5

@@ -1,5 +1,5 @@
 ﻿"use strict";
-var app = angular.module('lsw', ['ngRoute', 'ngResource', 'ngCookies', 'angular-loading-bar']);
+var app = angular.module('lsw', ['ngRoute', 'ngResource', 'ngCookies', 'angular-loading-bar', 'ngImgCrop']);
 
     // configure loading bar
     app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
@@ -19,7 +19,10 @@ var app = angular.module('lsw', ['ngRoute', 'ngResource', 'ngCookies', 'angular-
 
     app.config(['$routeProvider',
         function ($routeProvider) {
-            $routeProvider           
+            $routeProvider
+            .when('/voci', {
+                template: '<voci></voci>'
+            })
             .when('/listaSpesa', {
                 template: '<lista-spesa></lista-spesa>'
             })

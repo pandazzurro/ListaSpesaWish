@@ -5,10 +5,16 @@
         <li><a href="#"><img src="Content/images/logo.gif" style="height:35px; margin-bottom:2px" /></a></li>        
     </ul>
     <div class="uk-navbar-flip uk-hidden-small">
-        <ul class="uk-navbar-nav" ng-show="userCtrl.isLoggedIn()">            
+        <ul class="uk-navbar-nav" ng-show="userCtrl.isLoggedIn()">  
+            <li>
+                <a href="#/voci" class="uk-navbar-nav-subtitle">
+                    <i class="uk-icon-list-alt"></i> Voci
+                    <div>gestione lista della spesa</div>
+                </a>
+            </li>           
             <li>
                 <a href="#/listaSpesa" class="uk-navbar-nav-subtitle">
-                    <i class="fa fa-list"></i> Lista Spesa       
+                    <i class="uk-icon-cart-arrow-down"></i> Lista Spesa       
                     <div>gestione lista della spesa</div>             
                 </a>
             </li>            

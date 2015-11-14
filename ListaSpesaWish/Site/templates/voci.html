@@ -1,0 +1,70 @@
+﻿<div class="uk-grid data-uk-grid-margin">
+    <div class="uk-grid-width-1-2 uk-width-large-1-2 uk-width-medium-1-2 uk-align-center">
+        <table class="uk-table uk-table-striped">
+            <caption>
+                <div class="uk-panel-box uk-panel-box-primary uk-panel-box-secondary-hover">
+                    <span class="uk-align-center uk-text-center uk-text-bold uk-comment">Voci</span>
+                </div>
+            </caption>
+            <thead>
+                <tr>
+                    <th><button class="uk-button uk-button-success uk-align-center" data-uk-modal="{target:'#addVoce'}"><i class="uk-icon-plus"></i></button></th>
+                    <th>Nome</th>
+                    <th>Immagine</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="voce in voci.vociList">
+                    <td class="uk-text-center uk-width-1-5">                        
+                        <button class="uk-button uk-button-danger" ng-click="voci.removeVoce(voce)"><i class="uk-icon-minus"></i></button>
+                    </td>
+                    <td class="uk-width-3-5">{{voce.Name}}</td>
+                    <td class="uk-width-1-5">
+                        <img class="uk-comment-avatar imageIcon" ng-src="data:image/gif;base64,{{voce.Image}}" ng-click="voci.SelectedImage = voce.Image" data-uk-tooltip title="Clicca per ingrandire" data-uk-modal="{target:'#voceImage'}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="addVoce" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <form class="uk-form uk-form-horizontal">
+                    <fieldset>
+                        <legend>Creazione di una nuova voce</legend>
+                        <div class="uk-form-row">
+                            <div class="uk-form-label">Nome Voce:</div>
+                            <div class="uk-form-controls"><input type="text" placeholder="Inserire il nome" ng-model="voci.voceSelected.Name" /></div>
+                        </div>
+                        <div class="uk-form-row">
+                            <div class="uk-form-controls">Seleziona una immagine: <input type="file" id="fileInput" /></div>
+                            <div class="uk-form-controls cropArea">
+                                
+                                    <img-crop image="currentImage" area-type="square" result-image="currentCroppedImage" result-image-size="200" result-image-format="image/png"></img-crop>
+                                
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>       
+        <div class="uk-grid">
+            <div class="uk-container-center">
+                <button class="uk-button uk-modal-close uk-button-primary" ng-click="voci.addVoce(voce)" ng-disabled="!voci.canSave()">
+                    <i class="uk-icon-close"></i> Salva
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="voceImage" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-lightbox">
+        <a class="uk-modal-close uk-close uk-close-alt"></a>
+        <img class="uk-align-center imageLightBox" ng-src="data:image/gif;base64,{{voci.SelectedImage}}" alt="">
+    </div>
+</div>

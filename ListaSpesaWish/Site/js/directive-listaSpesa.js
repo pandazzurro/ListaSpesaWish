@@ -15,6 +15,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
             _this.listeAll = [];
             _this.voci = [];
             _this.utenti = [];
+            _this.timeout = 3000;
             _this.editMode = false;
 
             this.pulisciLista = function (ExceptCurrentUser, ModalChange) {
@@ -31,7 +32,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
             };
 
             this.loadLists = function () {
-                lswFct.listaSpesa.getAll().$promise
+                lswFct.listaSpesa.get({ id: userSrv.getCurrentUser().IdUtente }).$promise
                 .then(function (success) {
                     _this.listeAll = success;                   
                 });
@@ -59,7 +60,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                 });
                
                 _this.editMode = true;
-                UIkit.notify('Lista [' + l.Nome + '] caricata con successo: ', { status: 'success', timeout: 5000, pos: 'bottom-center' });
+                UIkit.notify('Lista [' + l.Nome + '] caricata con successo: ', { status: 'success', timeout: _this.timeout, pos: 'bottom-center' });
                 _this.modalInvertStatus("caricaLista");
             }
 
@@ -68,7 +69,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                     _this.modalInvertStatus("caricaLista");
                     lswFct.listaSpesa.mail(lista).$promise
                     .then(function (success) {
-                        UIkit.notify('Lista [' + lista.Nome + '] inviata con successo: ', { status: 'success', timeout: 5000, pos: 'bottom-center' });                        
+                        UIkit.notify('Lista [' + lista.Nome + '] inviata con successo: ', { status: 'success', timeout: _this.timeout, pos: 'bottom-center' });                        
                     });
                 });
             }
@@ -78,7 +79,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                     _this.modalInvertStatus("caricaLista");
                     lswFct.listaSpesa.remove({ id: lista.IdListaSpesa }).$promise
                     .then(function (success) {
-                        UIkit.notify('Lista [' + lista.Nome + '] rimossa con successo: ', { status: 'success', timeout: 5000, pos: 'bottom-center' });                        
+                        UIkit.notify('Lista [' + lista.Nome + '] rimossa con successo: ', { status: 'success', timeout: _this.timeout, pos: 'bottom-center' });                        
                     });
                 });
             }
@@ -149,9 +150,9 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                     lswFct.listaSpesa.clear({ id: idSpesa }).$promise
                     .then(function (esito) {
                         if(esito.Response)
-                            UIkit.notify('Lista ' + nomeLista + ' è stata rimossa poichè completa', { status: 'success', timeout: 5000, pos: 'bottom-center' });
+                            UIkit.notify('Lista ' + nomeLista + ' è stata rimossa poichè completa', { status: 'success', timeout: _this.timeout, pos: 'bottom-center' });
                         else
-                            UIkit.notify('Lista ' + nomeLista + ' aggiornata', { status: 'success', timeout: 5000, pos: 'bottom-center' });
+                            UIkit.notify('Lista ' + nomeLista + ' aggiornata', { status: 'success', timeout: _this.timeout, pos: 'bottom-center' });
                     });                    
                     _this.pulisciLista(false, true);
                 });
@@ -246,7 +247,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                 newVoce = jQuery.extend(true, {}, voce);
                 newVoce.incremental = _this.duplicateVoceIncremental();
                 _this.vociAdded.push(newVoce);
-                UIkit.notify('Aggiunta voce: ' + newVoce.Name, { status: 'success', timeout: 5000, pos: 'bottom-center' });
+                UIkit.notify('Aggiunta voce: ' + newVoce.Name, { status: 'success', timeout: _this.timeout, pos: 'bottom-center' });
             }
             this.removeVoce = function (voce) {                
                 _this.vociAdded.pop(voce);                
@@ -260,10 +261,10 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
 
                 if (!findInArray) {
                     _this.utentiAdded.push(utente);
-                    UIkit.notify('Aggiunta utente: ' + utente.Username, { status: 'success', timeout: 5000, pos: 'bottom-center' });
+                    UIkit.notify('Aggiunta utente: ' + utente.Username, { status: 'success', timeout: _this.timeout, pos: 'bottom-center' });
                 }   
                 else
-                    UIkit.notify('Utente già presente', { status: 'danger', timeout: 5000, pos:'bottom-center' });
+                    UIkit.notify('Utente già presente', { status: 'danger', timeout: _this.timeout, pos:'bottom-center' });
             }
             this.removeUtente = function (utente) {
                 for (i = 0; i < _this.utentiAdded.length; i++) {
@@ -298,7 +299,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                         }
                     })
                 } else {
-                    UIkit.notify('Nessun utente presente', { status: 'warning', timeout: 5000, pos: 'bottom-center' });
+                    UIkit.notify('Nessun utente presente', { status: 'warning', timeout: _this.timeout, pos: 'bottom-center' });
                 }
             }
 
