@@ -19,25 +19,7 @@ var app = angular.module('lsw', ['ngRoute', 'ngResource', 'ngCookies', 'angular-
 
     app.config(['$routeProvider',
         function ($routeProvider) {
-            $routeProvider
-            //.when('/mail', {
-            //    redirectTo: '/mail/in/1'
-            //})
-            //.when('/mail/compose/:recipientId/:proposalId?/:libraryComponentId?', {
-            //    template: '<message-new data-exchange=\'0\'></message-new>'
-            //})
-            //.when('/mail/exchange/:gameId', {
-            //    template: '<message-new data-exchange=\'{{ gameId }}\'></message-new>'
-            //})
-            //.when('/mail/message/:messageId', {
-            //    template: '<message></message>'
-            //})
-            //.when('/mail/:direction/:page', {
-            //    template: '<mailbox></mailbox>'
-            //})
-            //.when('/library/add', {
-            //    template: '<games-search></games-search>',
-            //})
+            $routeProvider           
             .when('/listaSpesa', {
                 template: '<lista-spesa></lista-spesa>'
             })

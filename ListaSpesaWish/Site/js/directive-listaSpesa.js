@@ -12,8 +12,10 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
             _this.vociAdded = [];
             _this.utentiAdded = [];
             _this.lista = {};
+            _this.listeAll = [];
             _this.voci = [];
-            _this.utenti = [];            
+            _this.utenti = [];
+            _this.editMode = false;
 
             this.pulisciLista = function () {
                 _this.vociAdded = [];
@@ -22,6 +24,41 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                 _this.loadUtenteCorrenteInLista();
                 _this.modalInvertStatus("pulisciLista");
             };
+
+            this.loadLists = function () {
+                lswFct.listaSpesa.getAll().$promise
+                .then(function (success) {
+                    _this.listeAll = success;
+                    _this.editMode = true;
+                });
+            }
+
+            this.importListElement = function (l) {
+                var le = l;
+
+                _this.modalInvertStatus("caricaLista");
+            }
+
+            this.inviaMail = function (lista) {
+                UIkit.modal.confirm("Sei sicuro di volere inviare una mail a tutti gli utenti della lista corrente?", function () {
+                    _this.modalInvertStatus("caricaLista");
+                    lswFct.listaSpesa.mail(lista).$promise
+                    .then(function (success) {
+                        UIkit.notify('Lista [' + lista.Nome + '] inviata con successo: ', { status: 'success', timeout: 5000, pos: 'bottom-center' });                        
+                    });
+                });
+            }
+
+            this.removeLista = function (lista) {
+                UIkit.modal.confirm("Sei sicuro di rimuovere la lista selezionata?", function () {
+                    _this.modalInvertStatus("caricaLista");
+                    lswFct.listaSpesa.remove({ id: lista.IdListaSpesa }).$promise
+                    .then(function (success) {
+                        UIkit.notify('Lista [' + lista.Nome + '] rimossa con successo: ', { status: 'success', timeout: 5000, pos: 'bottom-center' });                        
+                    });
+                });
+            }
+
             this.addList = function () {
                 var queryParameters = {                
                     Nome: _this.lista.Nome,
@@ -71,7 +108,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                 newVoce = jQuery.extend(true, {}, voce);
                 newVoce.incremental = _this.duplicateVoceIncremental();
                 _this.vociAdded.push(newVoce);
-                UIkit.notify('Aggiunta voce: ' + newVoce.Name, { status: 'success', timeout: 5000 });
+                UIkit.notify('Aggiunta voce: ' + newVoce.Name, { status: 'success', timeout: 5000, pos: 'bottom-center' });
             }
             this.removeVoce = function (voce) {                
                 _this.vociAdded.pop(voce);                
@@ -79,10 +116,10 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
             this.addUtente = function (utente) {
                 if (_this.utentiAdded.indexOf(utente) < 0) {
                     _this.utentiAdded.push(utente);
-                    UIkit.notify('Aggiunta utente: ' + utente.Username, { status: 'success', timeout: 5000 });
+                    UIkit.notify('Aggiunta utente: ' + utente.Username, { status: 'success', timeout: 5000, pos: 'bottom-center' });
                 }   
                 else
-                    UIkit.notify('Utente già presente', { status: 'danger', timeout: 5000 });
+                UIkit.notify('Utente già presente', { status: 'danger', timeout: 5000, pos:'bottom-center' });
             }
             this.removeUtente = function (utente) {                
                 _this.utentiAdded.pop(utente);                
@@ -113,7 +150,7 @@ app.directive('listaSpesa', ['factories', 'user-service', '$location', function 
                         }
                     })
                 } else {
-                    UIkit.notify('Nessun utente presente', { status: 'warning', timeout: 5000 });
+                    UIkit.notify('Nessun utente presente', { status: 'warning', timeout: 5000, pos:'bottom-center' });
                 }
             }
 

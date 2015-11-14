@@ -2,34 +2,16 @@
 <nav class="uk-navbar uk-navbar-attached">
     <a href="#navbar-side" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
     <ul class="uk-navbar-nav">
-        <li><a href="#"><img src="../css/images/logoMaxi.svg" style="width:40px; height:40px;" /></a></li>
-        <li><a href="#/contacts">Chi siamo</a></li>
+        <li><a href="#"><img src="Content/images/logo.gif" style="height:35px; margin-bottom:2px" /></a></li>        
     </ul>
     <div class="uk-navbar-flip uk-hidden-small">
-        <ul class="uk-navbar-nav" ng-show="userCtrl.isLoggedIn()">
-            <li>
-                <a href="#/feedback-vote" class="uk-navbar-nav-subtitle">
-                    <i class="fa fa-star"/><i class="fa fa-star-half-o"/><i class="fa fa-star-o"/> Feedback
-                    <div>assegna i feedback mancanti</div>
-                </a>
-            </li>
-            <li>
-                <a href="#/exchange" class="uk-navbar-nav-subtitle">
-                    <i class="fa fa-exchange"></i> Baratto
-                    <div>cerca e scambia giochi</div>
-                </a>
-            </li>
+        <ul class="uk-navbar-nav" ng-show="userCtrl.isLoggedIn()">            
             <li>
                 <a href="#/listaSpesa" class="uk-navbar-nav-subtitle">
-                    <i class="fa fa-list"></i> Lista Spesa                    
+                    <i class="fa fa-list"></i> Lista Spesa       
+                    <div>gestione lista della spesa</div>             
                 </a>
-            </li>
-            <li>
-                <a href="#/mail" class="uk-navbar-nav-subtitle">
-                    <i class="fa fa-envelope-o fa-status-{{ userCtrl.getCurrentUser().Messages.All > 0 ? 'warn' : 'ok' }}"></i> Messaggi
-                    <div>hai {{ userCtrl.getCurrentUser().Messages.All }} messaggi da leggere</div>
-                </a>
-            </li>
+            </li>            
         </ul>
         <ul class="uk-navbar-nav">
             <li class="uk-parent" ng-hide="userCtrl.isLoggedIn()" data-uk-dropdown="{mode:'click'}">
@@ -38,12 +20,9 @@
             </li>
             <li class="uk-parent" ng-show="userCtrl.isLoggedIn()" data-uk-dropdown="{mode:'click'}">
                 <a href="">
-                    <img width="30" height="30" margin="3" ng-src="data:image/gif;base64,{{ userCtrl.getCurrentUser().image}}" />
-                    {{ userCtrl.getCurrentUser().userName }} <i class="uk-icon-caret-down"></i>
+                    {{ userCtrl.getCurrentUser().Username }} <i class="uk-icon-caret-down"></i>
                 </a>
                 <div class="uk-dropdown uk-dropdown-navbar">
-                    <a href="#/edit-register">Il mio profilo</a>
-                    <hr>
                     <a href="#/logout" ng-click="userCtrl.logout()">Esci</a>
                 </div>
             </li>

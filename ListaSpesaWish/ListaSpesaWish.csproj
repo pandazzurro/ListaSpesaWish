@@ -215,6 +215,7 @@
     <Content Include="Content\components\upload.gradient.css" />
     <Content Include="Content\components\upload.gradient.min.css" />
     <Content Include="Content\components\upload.min.css" />
+    <Content Include="Content\images\logo.gif" />
     <Content Include="Content\uikit.almost-flat.css" />
     <Content Include="Content\uikit.almost-flat.min.css" />
     <Content Include="Content\uikit.css" />
@@ -1078,6 +1079,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\uikit.js" />
     <Content Include="Scripts\uikit.min.js" />
+    <Content Include="Service\mailTemplate.html" />
     <Content Include="Site\css\loading-bar.css" />
     <Content Include="Site\css\site.css" />
     <Content Include="Site\js\app.js" />
@@ -1106,9 +1108,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\VoceDto.cs" />
+    <Compile Include="Models\EmailDto.cs" />
+    <Compile Include="Models\ListaSpesaDto.cs" />
     <Compile Include="Models\LoginDto.cs" />
     <Compile Include="Models\UtenteDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\EmailService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,31 +1,40 @@
 ﻿<div class="uk-grid">
     <div class="uk-container-center">
         <button class="uk-button uk-button-success" data-uk-modal="{target:'#pulisciLista'}">
-            <i class="uk-icon-eraser"></i> Pulisci Lista
+            <i class="uk-icon-eraser"></i> Pulisci
         </button>
 
         <button class="uk-button uk-button-success" data-uk-modal="{target:'#salvaLista'}">
-            <i class="uk-icon-floppy-o"></i> Salva Lista
+            <i class="uk-icon-floppy-o"></i> Salva
+        </button>
+
+        <button class="uk-button uk-button-success" data-uk-modal="{target:'#caricaLista'}" ng-click="listaSpesa.loadLists()">
+            <i class="uk-icon-user"></i> Carica
         </button>
 
         <button class="uk-button uk-button-success" data-uk-modal="{target:'#carrello'}">
-            <i class="uk-icon-shopping-cart"></i> Mosta Carrello
+            <i class="uk-icon-shopping-cart"></i> Carrello
         </button>
 
         <button class="uk-button uk-button-success" data-uk-modal="{target:'#utenti'}">
-            <i class="uk-icon-user"></i> Mosta Utenti
-        </button>
+            <i class="uk-icon-user"></i> Utenti
+        </button>        
     </div>
 </div>
 
 <div class="uk-grid data-uk-grid-margin">
         <div class="uk-grid-width-1-2 uk-width-large-1-2 uk-width-medium-1-2">
             <table class="uk-table uk-table-striped">
-                <caption>Voci</caption>
+                <caption>
+                    <div class="uk-panel-box uk-panel-box-primary uk-panel-box-secondary-hover">
+                        <span class="uk-align-center uk-text-center uk-text-bold uk-comment">Voci</span>
+                    </div>
+                </caption>
                 <thead>
                     <tr>
                         <th></th>
                         <th>Nome</th>
+                        <th>Immagine</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,14 +42,19 @@
                         <td class="uk-text-center uk-width-1-5">
                             <button class="uk-button uk-button-success" ng-click="listaSpesa.addVoce(voce)"><i class="uk-icon-plus"></i></button>
                         </td>
-                        <td class="uk-width-4-5">{{voce.Name}}</td>
+                        <td class="uk-width-3-5">{{voce.Name}}</td>
+                        <td class="uk-width-1-5"><img class="uk-comment-avatar" ng-src="data:image/gif;base64,{{voce.Image}}" style="height:30px;"/></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="uk-grid-width-1-2 uk-width-large-1-2 uk-width-medium-1-2">
             <table class="uk-table">
-                <caption>Utenti</caption>
+                <caption>
+                    <div class="uk-panel-box uk-panel-box-primary uk-panel-box-secondary-hover">
+                        <span class="uk-align-center uk-text-center uk-text-bold uk-comment">Utenti</span>
+                    </div>
+                </caption>
                 <thead>
                     <tr>
                         <th></th>
@@ -66,7 +80,6 @@
         <div class="uk-grid">
             <div class="uk-grid-width-1-1 uk-width-large-1-1 uk-width-medium-1-1">
                 <table class="uk-table uk-table-striped">
-                <caption>Voci</caption>
                 <thead>
                     <tr>
                         <th></th>
@@ -79,7 +92,7 @@
                         <td class="uk-text-center uk-width-1-5">
                             <button class="uk-button uk-button-danger" ng-click="listaSpesa.removeVoce(voce)"><i class="uk-icon-minus"></i></button>
                         </td>
-                        <td>{{voce.Name}}</td>
+                        <td class="uk-text-center uk-width-3-5">{{voce.Name}}</td>
                         <td>
                             <div class="uk-form-row">                                
                                 <div class="uk-form-controls uk-form-controls-text uk-form-controls-condensed">     
@@ -88,6 +101,7 @@
                                 </div>
                             </div>
                         </td>
+                        <td class="uk-width-1-5"><img class="uk-comment-avatar" ng-src="data:image/gif;base64,{{voce.Image}}" style="height:30px;" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -108,8 +122,7 @@
             <a class="uk-modal-close uk-close"></a>
             <div class="uk-grid">
                 <div class="uk-grid-width-1-2 uk-width-large-1-1 uk-width-medium-1-1">
-                    <table class="uk-table">
-                        <caption>Utenti</caption>
+                    <table class="uk-table">                        
                         <thead>
                             <tr>
                                 <th></th>
@@ -185,6 +198,42 @@
                 </button>
                 <button class="uk-button uk-button-danger uk-modal-close">
                     <i class="uk-icon-close"></i> Annulla
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="caricaLista" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-grid">
+            <div class="uk-grid-width-1-2 uk-width-large-1-1 uk-width-medium-1-1">
+                <table class="uk-table">
+                    <caption>Lista</caption>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="lista in listaSpesa.listeAll track by $index">
+                            <td class="uk-text-center uk-width-2-5">
+                                <button class="uk-button uk-button-danger" ng-click="listaSpesa.removeLista(lista)"><i class="uk-icon-trash"></i></button>
+                                <button class="uk-button uk-button-primary" ng-click="listaSpesa.importListElement(lista)"><i class="uk-icon-download"></i></button>
+                                <button class="uk-button uk-button-primary" ng-click="listaSpesa.inviaMail(lista)"><i class="uk-icon-envelope"></i></button>
+                            </td>
+                            <td>{{lista.Nome}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-container-center">
+                <button class="uk-button uk-modal-close">
+                    <i class="uk-icon-close"></i> Chiudi
                 </button>
             </div>
         </div>

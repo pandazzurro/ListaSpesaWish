@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ListaSpesaWish.EF;
+using ListaSpesaWish.Service;
+using ListaSpesaWish.Models;
 
 namespace ListaSpesaWish.Controllers
 {
@@ -98,12 +100,43 @@ namespace ListaSpesaWish.Controllers
             {
                 return NotFound();
             }
+            
+            db.UtentiListaSpesa.RemoveRange(db.UtentiListaSpesa.Where(x => x.ListaSpesa.IdListaSpesa == listaSpesa.IdListaSpesa));
+            db.VoceListaSpesa.RemoveRange(db.VoceListaSpesa.Where(x => x.ListaSpesa.IdListaSpesa == listaSpesa.IdListaSpesa));
 
             db.ListaSpesa.Remove(listaSpesa);
             await db.SaveChangesAsync();
 
             return Ok(listaSpesa);
         }
+
+        [HttpPost]
+        [Route("api/ListaSpesa/Mail")]        
+        public async Task<IHttpActionResult> SendListaSpesa(ListaSpesa listaSpesa)
+        {
+            ListaSpesaDto dto = await db.ListaSpesa
+                                        .Include(x => x.UtentiListaSpesa)
+                                        .Include(x => x.VociListaSpesa)
+                                        .Where(x => x.IdListaSpesa == listaSpesa.IdListaSpesa)
+                                        .Select(x => new ListaSpesaDto()
+                                        {
+                                            Nome = x.Nome,
+                                            Voci = x.VociListaSpesa.Select(y => new VoceDto()
+                                                                    {
+                                                                        Name = y.Voce.Name,
+                                                                        Comprata = y.Comprata
+                                                                    }).ToList(),
+                                            Utenti = x.UtentiListaSpesa.Select(y => y.Utente).ToList()
+                                        })
+                                        .FirstOrDefaultAsync();
+   
+            if(await EmailService.SendAsync(dto))
+                return Ok();
+            return InternalServerError();
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {

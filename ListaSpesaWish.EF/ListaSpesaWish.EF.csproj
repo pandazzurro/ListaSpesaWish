@@ -56,11 +56,6 @@
     <Compile Include="DbInitializer.cs" />
     <Compile Include="ListaSpesa.cs" />
     <Compile Include="ListaSpesaContext.cs" />
-    <Compile Include="Migrations\201511130703595_InitialCreate.cs" />
-    <Compile Include="Migrations\201511130703595_InitialCreate.Designer.cs">
-      <DependentUpon>201511130703595_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utente.cs" />
     <Compile Include="UtentiListaSpesa.cs" />
@@ -78,11 +73,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511130703595_InitialCreate.resx">
-      <DependentUpon>201511130703595_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

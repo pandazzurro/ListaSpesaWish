@@ -10,6 +10,7 @@ namespace ListaSpesaWish.EF
     {
         public long IdVoce { get; set; }
         public string Name { get; set; }
+        public byte[] Image { get; set; }
 
         public ICollection<VoceListaSpesa> VociListaSpesa { get; set; }
 
